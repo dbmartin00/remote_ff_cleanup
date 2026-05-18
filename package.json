@@ -1,0 +1,17 @@
+{
+  "name": "aria",
+  "version": "1.0.0",
+  "description": "Split.io SDK feature flag demonstration console app",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@splitsoftware/splitio": "^11.11.1",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
