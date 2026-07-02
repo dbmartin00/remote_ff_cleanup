@@ -73,21 +73,18 @@ function setupSDKUpdateListener(refreshCallback) {
 function evaluateFlags() {
   const abcedarian = splitClient.getTreatment(key, 'abcedarian');
   const beauty = splitClient.getTreatment(key, 'beauty');
-  const chilton = splitClient.getTreatment(key, 'chilton');
 
   // Debug output
   if (process.env.DEBUG === 'true') {
     console.log('[DEBUG] Flag evaluations:', {
       abcedarian,
       beauty,
-      chilton
     });
   }
 
   return {
     abcedarian: abcedarian === 'on',
     beauty: beauty === 'on',
-    chilton: chilton === 'on'
   };
 }
 
@@ -126,18 +123,14 @@ function drawStatusBar(flags) {
   const bold = '\x1b[1m';
   const cyan = '\x1b[36m';
 
-  // Splash title if chilton is on
-  if (flags.chilton) {
-    console.log(`${bold}${cyan}★ ★ ★  Real time flag updates!  ★ ★ ★${reset}`);
-    console.log('');
-  }
+  console.log(`${bold}${cyan}★ ★ ★  Real time flag updates!  ★ ★ ★${reset}`);
+  console.log('');
 
   const abcedarianIcon = flags.abcedarian ? `${green}[X]${reset}` : `${red}[ ]${reset}`;
   const beautyIcon = flags.beauty ? `${green}[X]${reset}` : `${red}[ ]${reset}`;
-  const chiltonIcon = flags.chilton ? `${green}[X]${reset}` : `${red}[ ]${reset}`;
 
   console.log(`${bold}=== Feature Flag Demo ===${reset}`);
-  console.log(`${abcedarianIcon} abcedarian (CAPS)    ${beautyIcon} beauty (colors)    ${chiltonIcon} chilton (splash title)`);
+  console.log(`${abcedarianIcon} abcedarian (CAPS)    ${beautyIcon} beauty (colors)`);
   console.log('─'.repeat(60));
 }
 
@@ -156,12 +149,10 @@ This text demonstrates feature flag effects in real-time.
 Current behaviors:
 - abcedarian: Transforms text to UPPERCASE
 - beauty: Adds colorful highlighting
-- chilton: Shows splash title at top
 
 Controls:
   Press 'a' to check abcedarian state
   Press 'b' to check beauty state
-  Press 'c' to check chilton state
   Press 'q' to quit
 
 Change flags in Split.io UI and watch updates appear here!
@@ -189,7 +180,7 @@ function setupKeypress(refreshCallback) {
     }
 
     // Refresh on flag keys
-    if (['a', 'b', 'c'].includes(key.name)) {
+    if (['a', 'b'].includes(key.name)) {
       refreshCallback();
     }
   });
